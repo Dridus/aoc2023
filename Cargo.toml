@@ -12,5 +12,9 @@ path = "src/day01a/main.rs"
 name = "day01b"
 path = "src/day01b/main.rs"
 
+[[bin]]
+name = "day02a"
+path = "src/day02a/main.rs"
+
 [dependencies]
 nom = "7.1.3"

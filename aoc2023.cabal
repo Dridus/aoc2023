@@ -64,6 +64,7 @@ common shared
 
   build-depends:
     , base          >=4.13.0.0 && <4.18.0.0.0
+    , attoparsec
     , containers
     , lens
     , mtl
@@ -88,4 +89,8 @@ executable day01b
   import: shared
   hs-source-dirs: src/day01b
   main-is: Main.hs
-  build-depends: attoparsec
+
+executable day02a
+  import: shared
+  hs-source-dirs: src/day02a
+  main-is: Main.hs
