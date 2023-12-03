@@ -1,0 +1,16 @@
+[package]
+name = "aoc2023"
+version = "0.1.0"
+edition = "2021"
+autobins = false
+
+[[bin]]
+name = "day01a"
+path = "src/day01a/main.rs"
+
+[[bin]]
+name = "day01b"
+path = "src/day01b/main.rs"
+
+[dependencies]
+nom = "7.1.3"

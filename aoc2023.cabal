@@ -1,0 +1,91 @@
+cabal-version: 2.4
+name: aoc2023
+version: 0.1.0.0
+license: MIT
+
+common shared
+  ghc-options:
+    -Wall -Wincomplete-record-updates -Wincomplete-uni-patterns
+    -Wmissing-deriving-strategies -Wunused-foralls -Wunused-foralls
+    -fprint-explicit-foralls -fprint-explicit-kinds
+    -Werror=missing-fields
+
+  mixins:
+    base hiding (Prelude),
+    relude (Relude as Prelude, Relude.Container.One),
+    relude
+
+  default-extensions:
+      NoStarIsType
+      BangPatterns
+      ConstraintKinds
+      DataKinds
+      DeriveDataTypeable
+      DeriveFoldable
+      DeriveFunctor
+      DeriveGeneric
+      DeriveLift
+      DeriveTraversable
+      DerivingStrategies
+      DerivingVia
+      EmptyCase
+      EmptyDataDecls
+      EmptyDataDeriving
+      ExistentialQuantification
+      ExplicitForAll
+      FlexibleContexts
+      FlexibleInstances
+      FunctionalDependencies
+      GADTSyntax
+      GeneralisedNewtypeDeriving
+      ImportQualifiedPost
+      KindSignatures
+      LambdaCase
+      MultiParamTypeClasses
+      MultiWayIf
+      NamedFieldPuns
+      NumericUnderscores
+      OverloadedStrings
+      PatternSynonyms
+      PolyKinds
+      PostfixOperators
+      QuasiQuotes
+      RankNTypes
+      RecordWildCards
+      ScopedTypeVariables
+      StandaloneDeriving
+      StandaloneKindSignatures
+      TemplateHaskell
+      TupleSections
+      TypeApplications
+      TypeFamilies
+      TypeOperators
+      ViewPatterns
+
+  build-depends:
+    , base          >=4.13.0.0 && <4.18.0.0.0
+    , containers
+    , lens
+    , mtl
+    , relude        >=1.0
+    , template-haskell
+    , text
+    , time
+
+  default-language: Haskell2010
+
+library
+  import: shared
+  hs-source-dirs: src
+  exposed-modules:
+
+executable day01a
+  import: shared
+  hs-source-dirs: src/day01a
+  main-is: Main.hs
+
+executable day01b
+  import: shared
+  hs-source-dirs: src/day01b
+  main-is: Main.hs
+  build-depends: attoparsec
