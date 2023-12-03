@@ -14,6 +14,12 @@ struct Observation {
     blue: u32,
 }
 
+impl Observation {
+    fn power(&self) -> u32 {
+        self.red * self.green * self.blue
+    }
+}
+
 impl PartialOrd<Observation> for Observation {
     fn partial_cmp(&self, rhs: &Observation) -> Option<Ordering> {
         if self.red == rhs.red && self.green == rhs.green && self.blue == rhs.blue {
@@ -133,10 +139,11 @@ fn main() {
 
     for (g, obsum, possible) in games_summed.iter() {
         println!(
-            "{}{} => {}",
+            "{}{} => {}, {} power",
             if *possible { "Possible " } else { "" },
             g,
-            obsum
+            obsum,
+            obsum.power()
         );
     }
 
@@ -146,6 +153,14 @@ fn main() {
             .iter()
             .filter(|(_, _, possible)| *possible)
             .map(|(g, _, _)| g.game_no)
+            .sum::<u32>()
+    );
+
+    println!(
+        "{}",
+        games_summed
+            .iter()
+            .map(|(_, obsum, _)| obsum.power())
             .sum::<u32>()
     );
 }

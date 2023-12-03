@@ -90,7 +90,7 @@ executable day01b
   hs-source-dirs: src/day01b
   main-is: Main.hs
 
-executable day02a
+executable day02
   import: shared
-  hs-source-dirs: src/day02a
+  hs-source-dirs: src/day02
   main-is: Main.hs

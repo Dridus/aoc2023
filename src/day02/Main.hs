@@ -1,6 +1,6 @@
 module Main where
 
-import Control.Lens (_1, _3, folded, view, sumOf, each, filtered)
+import Control.Lens (each, filtered, folded, sumOf, view, _1, _2, _3, to)
 import Control.Lens.TH (makeClassy)
 import Data.Attoparsec.Combinator (sepBy)
 import Data.Attoparsec.Text.Lazy
@@ -40,6 +40,9 @@ instance Semigroup Observation where
 
 instance Monoid Observation where
   mempty = Observation 0 0 0
+
+observationPower :: Observation -> Int
+observationPower (Observation r g b) = r * g * b
 
 data Game = Game
   { _gameNo :: Int,
@@ -82,5 +85,13 @@ main = do
           let obsum = view (observations . folded) g
            in (g, obsum, obsum <= limit)
   for_ summedGames $ \(g, obsum, possible) ->
-    putStrLn $ bool "" "Possible " possible <> show g <> " => " <> show obsum
+    putStrLn $
+      bool "" "Possible " possible
+        <> show g
+        <> " => "
+        <> show obsum
+        <> ", "
+        <> show (observationPower obsum)
+        <> " power"
   print $ sumOf (each . filtered (view _3) . _1 . gameNo) summedGames
+  print $ sumOf (each . _2 . to observationPower) summedGames
