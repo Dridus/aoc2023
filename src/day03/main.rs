@@ -1,4 +1,7 @@
 use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufRead as _, BufReader};
+use std::path::PathBuf;
 
 mod coord;
 mod dim;
@@ -11,7 +14,10 @@ use crate::image::Image;
 use crate::span::Span;
 
 fn main() {
-    let input = load();
+    let mut args = std::env::args();
+    args.next().unwrap();
+    let path = args.next().unwrap().into();
+    let input = load(path);
 
     let mut run_start_opt: Option<Coord> = None;
     let number_spans = input
@@ -109,8 +115,10 @@ fn is_symbol(ch: u8) -> bool {
     ch != b'.' && !ch.is_ascii_digit()
 }
 
-fn load() -> Image<u8> {
-    let mut lines = std::io::stdin().lines();
+fn load(path: PathBuf) -> Image<u8> {
+    let file = File::open(path).unwrap();
+    let reader = BufReader::new(file);
+    let mut lines = reader.lines();
     let Some(first_line) = lines.next() else {
         panic!("empty input");
     };

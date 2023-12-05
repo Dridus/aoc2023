@@ -94,3 +94,9 @@ executable day02
   import: shared
   hs-source-dirs: src/day02
   main-is: Main.hs
+
+executable day03
+  import: shared
+  hs-source-dirs: src/day03
+  main-is: Main.hs
+  build-depends: array, bytestring
